@@ -10,7 +10,7 @@ COPY secret_key /aws/secret_key
 RUN cat /aws/access_key
 
 RUN \
-  cat /aws/access_key | base64 --decode | bin/elasticsearch-keystore add --stdin --force s3.client.default.access_key && \
+  cat /aws/access_key | bin/elasticsearch-keystore add --stdin --force s3.client.default.access_key && \
   cat /aws/secret_key | base64 --decode | bin/elasticsearch-keystore add --stdin --force s3.client.default.secret_key
 
 RUN rm -fR /aws
