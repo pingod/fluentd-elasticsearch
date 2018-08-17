@@ -1,25 +1,14 @@
-# Copyright 2017 The Kubernetes Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+FROM docker.elastic.co/elasticsearch/elasticsearch-basic:6.2.5
 
-FROM docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch repository-s3
 
-VOLUME ["/data"]
-EXPOSE 9200 9300
+RUN mkdir -p /aws
 
-COPY elasticsearch_logging_discovery run.sh bin/
-COPY config/elasticsearch.yml config/log4j2.properties config/
+COPY access_key /aws/access_key
+COPY secret_key /aws/secret_key
 
-USER root
-RUN chown -R elasticsearch:elasticsearch ./
-CMD ["bin/run.sh"]
+RUN \
+  cat /aws/access_key | base64 --decode | bin/elasticsearch-keystore add --stdin --force s3.client.default.access_key && \
+  cat /aws/secret_key | base64 --decode | bin/elasticsearch-keystore add --stdin --force s3.client.default.secret_key
+
+RUN rm -fR /aws
