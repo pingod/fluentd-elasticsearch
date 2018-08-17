@@ -25,5 +25,7 @@ export MINIMUM_MASTER_NODES=${MINIMUM_MASTER_NODES:-2}
 
 chown -R elasticsearch:elasticsearch /data
 
+/usr/share/elasticsearch/bin/elasticsearch-plugin install --batch repository-s3 
+
 ./bin/elasticsearch_logging_discovery >> ./config/elasticsearch.yml
 exec su elasticsearch -c /usr/local/bin/docker-entrypoint.sh
