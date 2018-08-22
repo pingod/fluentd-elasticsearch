@@ -30,7 +30,8 @@ RUN \
 #  echo "S3SignerType" | bin/elasticsearch-keystore add --stdin s3.client.default.signer && \
   cat /aws/secret_key | bin/elasticsearch-keystore add --stdin --force s3.client.default.secret_key
 RUN rm -fR /aws
-COPY repository-s3-6.3.2.zip /tmp/s3.zip
+COPY repository-s3-6.3.0.zip /tmp/s3.zip
+#COPY repository-s3-6.3.2.zip /tmp/s3.zip
 #COPY repository-s3-6.2.4.zip /tmp/s3.zip
 USER root
 #RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch repository-s3
