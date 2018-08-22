@@ -1,9 +1,9 @@
 # DockerFile:https://github.com/elastic/elasticsearch-docker/tree/6.2
 #FROM docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
 #FROM docker.elastic.co/elasticsearch/elasticsearch:5.6.10
-
 #FROM docker.elastic.co/elasticsearch/elasticsearch:6.3.2
-FROM docker.elastic.co/elasticsearch/elasticsearch:6.3.0-cacerts
+#FROM docker.elastic.co/elasticsearch/elasticsearch:6.3.0-cacerts
+FROM docker.elastic.co/elasticsearch/elasticsearch:6.3.1
 
 VOLUME ["/data"]
 EXPOSE 9200 9300
@@ -30,7 +30,8 @@ RUN \
 #  echo "S3SignerType" | bin/elasticsearch-keystore add --stdin s3.client.default.signer && \
   cat /aws/secret_key | bin/elasticsearch-keystore add --stdin --force s3.client.default.secret_key
 RUN rm -fR /aws
-COPY repository-s3-6.3.0.zip /tmp/s3.zip
+COPY repository-s3-6.3.1.zip /tmp/s3.zip
+#COPY repository-s3-6.3.0.zip /tmp/s3.zip
 #COPY repository-s3-6.3.2.zip /tmp/s3.zip
 #COPY repository-s3-6.2.4.zip /tmp/s3.zip
 USER root
