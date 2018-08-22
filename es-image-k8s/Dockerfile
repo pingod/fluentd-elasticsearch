@@ -12,10 +12,11 @@ env NODE_MASTER=true
 env NODE_NAME=elasticsearch-logging-0
 env TRANSPORT_PORT=9300
 
-COPY elasticsearch_logging_discovery run.sh bin/
+#COPY elasticsearch_logging_discovery run.sh bin/
+ADD elasticsearch_logging_discovery.tar  run.sh bin/
 COPY config/elasticsearch.yml config/log4j2.properties config/
 
-RUN curl -s https://www.amazontrust.com/repository/SFSRootCAG2.pem | $JAVA_HOME/bin/keytool -cacerts -storepass changeit -importcert -noprompt
+#RUN curl -s https://www.amazontrust.com/repository/SFSRootCAG2.pem | $JAVA_HOME/bin/keytool -cacerts -storepass changeit -importcert -noprompt
 
 RUN mkdir -p /aws
 COPY access_key /aws/access_key
