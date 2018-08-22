@@ -8,7 +8,9 @@ transport.tcp.port: ${TRANSPORT_PORT}
 http.port: ${HTTP_PORT}
 
 path.data: /data
+path.repo:  /backup
 
 network.host: 0.0.0.0
 
 discovery.zen.minimum_master_nodes: ${MINIMUM_MASTER_NODES}
+s3.client.default.endpoint: chengdu.hcp1.hdslab.net
