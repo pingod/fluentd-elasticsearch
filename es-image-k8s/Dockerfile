@@ -1,6 +1,8 @@
 # DockerFile:https://github.com/elastic/elasticsearch-docker/tree/6.2
-FROM docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+#FROM docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
 #FROM docker.elastic.co/elasticsearch/elasticsearch:5.6.10
+
+FROM docker.elastic.co/elasticsearch/elasticsearch:6.3.2
 
 VOLUME ["/data"]
 EXPOSE 9200 9300
